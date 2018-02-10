@@ -41,5 +41,9 @@
   [src-chapter]
   (count (select (get-dom src-chapter) [:option])))
 
+(defn print-all-pages-in-a-chapter-mangareadernet
+  [src-chapter]
+  (dotimes [n (count-number-of-pages-in-a-chapter-mangareadernet src-chapter)] (println (str src-chapter (str "/") (+ n 1)))))
+
 (defn -main
   [])
