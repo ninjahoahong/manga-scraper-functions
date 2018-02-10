@@ -47,7 +47,7 @@
 
 (defn get-page-img-src-mangareadernet
   [src-page]
-  (select (get-dom src-page) [:#img]))
+  (:src (:attrs (first (select (get-dom src-page) [:#img])))))
 
 (defn -main
   [])
