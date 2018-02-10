@@ -3,10 +3,14 @@
         [org.httpkit.client :only [get]])
   (:import java.net.URL))
 
-(def src "http://example-manga-site.com")
+; Examples of a source:
+;(def src "http://example-manga-site.com")
+;(def src-manga "http://example-manga-site.com/manga-name")
+;(def src-chapter "http://example-manga-site.com/manga-name/1")
+
 
 (defn get-dom
-  []
+  [src]
   (html-snippet
    (:body
      @(org.httpkit.client/get
@@ -28,6 +32,14 @@
 (defn extract-chapter-counts
   []
   (map #(select % [:div.chapter_count]) (extract-mangareadernet-search-items (get-dom))))
+
+(defn count-number-of-chapters-in-a-manga-mangareadernet
+  [src-manga]
+  (count (select (select (get-dom src-manga) [:div#chapterlist]) [:tr])))
+
+(defn count-number-of-pages-in-a-chapter-mangareadernet
+  [src-chapter-page]
+  (count (select (get-dom src-chapter) [:option])))
 
 (defn -main
   [])
