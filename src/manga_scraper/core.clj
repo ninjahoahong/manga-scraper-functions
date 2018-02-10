@@ -38,7 +38,7 @@
   (count (select (select (get-dom src-manga) [:div#chapterlist]) [:tr])))
 
 (defn count-number-of-pages-in-a-chapter-mangareadernet
-  [src-chapter-page]
+  [src-chapter]
   (count (select (get-dom src-chapter) [:option])))
 
 (defn -main
