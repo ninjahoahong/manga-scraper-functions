@@ -21,5 +21,13 @@
   [dom]
   (select dom [:div.mangaresultitem]))
 
+(defn extract-mangareadernet-search-item-chapter-count
+  [dom]
+  (select dom [:div.chapter_count]))
+
+(defn extract-chapter-counts
+  []
+  (map #(select % [:div.chapter_count]) (extract-mangareadernet-search-items (get-dom))))
+
 (defn -main
   [])
