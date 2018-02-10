@@ -1,5 +1,5 @@
 (ns manga-scraper.core
-  (:use [net.cgrand.enlive-html :only [html-snippet select]]
+  (:use [net.cgrand.enlive-html :only [html-snippet select attr= attr-has]]
         [org.httpkit.client :only [get]])
   (:import java.net.URL))
 
@@ -44,6 +44,10 @@
 (defn print-all-pages-in-a-chapter-mangareadernet
   [src-chapter]
   (dotimes [n (count-number-of-pages-in-a-chapter-mangareadernet src-chapter)] (println (str src-chapter (str "/") (+ n 1)))))
+
+(defn get-page-img-src-mangareadernet
+  [src-page]
+  (select (get-dom src-page) [:#img]))
 
 (defn -main
   [])
