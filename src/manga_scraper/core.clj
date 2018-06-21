@@ -1,6 +1,10 @@
 (ns manga-scraper.core
+  (:require 
+    [org.httpkit.server :refer [run-server]]
+    [compojure.core :refer :all]
+    [compojure.route :as route])
   (:use [net.cgrand.enlive-html :only [html-snippet select attr= attr-has]]
-        [org.httpkit.client :only [get]])
+    [org.httpkit.client :only [get]])
   (:import java.net.URL))
 
 ; Examples of a source:
@@ -49,5 +53,18 @@
   [src-page]
   (:src (:attrs (first (select (get-dom src-page) [:#img])))))
 
-(defn -main
-  [])
+(defn get-all-mangas
+  []
+  (let [response {:status  200
+                  :headers {"Content-Type" "text/html"}
+                  :body    (str "Hello")}]
+    response))
+
+(defroutes allroutes
+  (GET "/" [] "<h1>Welcome</h1>")
+  (GET "/mangas" [] (get-all-mangas))
+  (route/not-found "<h1>Page not found</h1>"))
+
+(defn -main [& args]
+  (run-server allroutes {:port 8080})
+  (println "Server started on port 8080"))

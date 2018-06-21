@@ -6,4 +6,5 @@
    :url  "MIT"}
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [enlive "1.1.6"]
-                 [http-kit "2.2.0"]])
+                 [compojure "1.6.1"]
+                 [http-kit "2.3.0"]])
